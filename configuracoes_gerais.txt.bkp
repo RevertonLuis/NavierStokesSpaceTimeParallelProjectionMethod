@@ -1,0 +1,77 @@
+Iteracoes_Externas 1000
+Iteracoes_Solver 1
+
+! Numero de threads (ou processadores)
+Threads 1
+
+!------- Numero de passos de tempo, para pesquisa utilizar >= 10
+!------- Para o problema da cavidade utilizar -1 (vai deixar o problema
+!------- atingir o regime permanente)
+!------- Para solucao em um tempo proximo de Tf utilizar -1
+!------- Observar que -1 pode implicar em processamento longo pois
+!------- ht e uma variavel que dinamica e pode atingir valores pequenos
+Tn 9
+
+!------- Numero de volumes nas direcoes x e y
+!------- Deixar sempre Nx=Ny e Nx = 8, 16, 32, 64, 128, 256, 512, 1024, ...
+Nx 128
+Ny 128
+
+
+!------- Numero de Reynolds e Ro (nao alterar Ro)
+!------- Para o problema teste 5 Re=1. (solucao analitica nao aceita outros Re)
+!------- Para o problema teste 4 (cavidade) pode utilizar qualquer Re
+Re 1.
+
+!------- Qui = 1 => rotacional, Qui = 0 => versao padrao
+Qui 1
+
+
+!------- Metodo sera utilizado para resolver o problema
+!1=MG_GS => Multigrid com solver Gauss-Seidel
+!2=CG => Gradiente Conjugado
+!3=PCG_MG_GS => Gradiente Conjugado Precondicionado com MG_GS
+!4=ILU => Metodo ILU
+!5=MG_ILU => Multigrid com solver ILU
+!6=PCG_MG_ILU => Gradiente Conjugado Precondicionado com MG_ILU
+! Como sao 3 sistemas de equacoes (u, v e p) devera ser escolhido o tipo
+! metodo para cada sistema de equacao
+Metodo_P 1
+Metodo_U 1
+Metodo_V 1
+
+!------- Tolerancia no criterio de parada de cada metodo
+Tolerancia_P 1.E-4
+Tolerancia_U 1.E-11
+Tolerancia_V 1.E-11
+
+
+! Extrapolacao de U e V
+! 1 = segunda ordem
+! 2 = cubica
+Extrapolacao_U 2
+Extrapolacao_V 2
+
+
+!------- Dimensao espacial do dominio
+Xf 1.
+Xi 0.
+Yf 1.
+Yi 0.
+
+!------- Dimensao temporal do dominio
+Ti 0.
+Tf 1.
+
+!------- Condicao CFL: garante convergencia com menos passos de tempo,
+!------- mais economica que o criterio classico dos problemas transientes
+CFL 0.1
+
+
+!------- Problema para estudo (por enquanto: 1, 2, 3, 4 e 5)
+!------- Nesta versao do codigo so estao disponiveis os problemas 4 (cavidade) e 5 (com solucao analitica)
+Experimento 5
+
+arq_geral ./resultados/configs.txt
+unit_arq_geral 2
+
